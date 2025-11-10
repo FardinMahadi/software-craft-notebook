@@ -6,42 +6,25 @@ last_reviewed: 09-11-2025
 
 # Asynchronous Patterns & Browser APIs
 
-## Event Loop Refresher
+## Why It Matters
 
-- Macro tasks (setTimeout, DOM events) vs microtasks (Promises, queueMicrotask).
-- React scheduling leverages microtasks; understand ordering to avoid race conditions.
+- Modern apps depend on asynchronous workflows for network requests, scheduling, and browser APIs. Understanding the event loop prevents race conditions and unhandled errors.
 
-## Promises
+## Core Ideas
 
-- Promise lifecycle: pending → fulfilled/rejected.
-- Chain with `.then`, `.catch`, `.finally`; always handle rejection to avoid unhandled errors.
-- Use `Promise.all`, `Promise.allSettled`, `Promise.race`, `Promise.any` for coordination.
+- **Event loop refresher:** distinguish macro tasks (`setTimeout`, DOM events) and microtasks (Promises, `queueMicrotask`); React scheduling often leverages microtasks.
+- **Promises:** handle lifecycle (pending → fulfilled/rejected), chain with `.then/.catch/.finally`, and coordinate with `Promise.all`, `Promise.allSettled`, `Promise.race`, `Promise.any`.
+- **Async/await:** syntactic sugar over promises; wrap `await` in `try/catch`, parallelize with `Promise.all`, convert callback APIs to promises.
+- **Fetch & AbortController:** check `response.ok`, parse with `response.json()`, pass `AbortController` signals to cancel requests.
+- **Timers & scheduling:** use `setTimeout`, `setInterval`, `requestAnimationFrame`; clear timers on cleanup (especially in React effects); leverage `queueMicrotask` for post-render adjustments.
+- **Error handling & retry:** implement backoff strategies, propagate errors, surface issues via UI or logging.
 
-## Async/Await
+## Real-World Scenario
 
-- Syntactic sugar over promises; `await` pauses execution within async function until promise settles.
-- Wrap `await` calls in `try/catch`; consider `Promise.all` for parallel awaits.
-- Convert callback-based APIs (e.g., IndexedDB) into promises for async/await compatibility.
+- A React dashboard wraps `fetch` in a utility that adds timeouts, retries, and abort support. During component unmount, the effect cleanup calls `controller.abort()` to prevent setting state on an unmounted component.
 
-## Fetch & AbortController
+## Follow-up
 
-- Fetch returns a promise; check `response.ok`, parse with `response.json()`.
-- Abort requests with `AbortController`; pass signal to fetch and abort during cleanup.
-
-## Timers & Scheduling
-
-- `setTimeout`, `setInterval`, `requestAnimationFrame` for scheduling tasks.
-- Clear timers on cleanup (especially in React effects) to avoid leaks.
-- Use `queueMicrotask` for post-render adjustments without layout thrash.
-
-## Error Handling & Retry
-
-- Implement exponential backoff or limit retries for network calls.
-- Bubble errors to calling context; in React, surface to error boundaries or UI messaging.
-- Log errors with metadata for observability.
-
-## Practice Prompts
-
-- Write a utility that wraps fetch with timeout, retry, and JSON parsing.
-- Demonstrate how microtasks and macrotasks interleave by logging inside different callbacks.
-- Build a small data loader that batches concurrent requests with `Promise.all` and handles partial failures.
+- [ ] Write a utility that wraps fetch with timeout, retry, and JSON parsing.
+- [ ] Demonstrate how microtasks and macrotasks interleave by logging inside different callbacks.
+- [ ] Build a data loader that batches concurrent requests with `Promise.all` and handles partial failures.

@@ -46,3 +46,10 @@ last_reviewed: 09-11-2025
 - Create a small utility library using named exports and consume it from a React component.
 - Configure ESLint + Prettier in a sandbox project and document the command to run checks.
 - Implement dynamic imports for a heavy chart component and verify the bundle splits in build output.
+
+---
+
+**Notes**
+
+- Revisit latest bundler docs (Vite, Next.js, Webpack 5) for updates on path aliases and environment variable handling.
+- Confirm tree-shaking guidance for CommonJS vs ES Module packages when linking to references.

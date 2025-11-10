@@ -6,38 +6,24 @@ last_reviewed: 09-11-2025
 
 # Objects, Collections & Immutability
 
-## Object Manipulation
+## Why It Matters
 
-- Use property shorthand (`{ name, age }`) and computed keys (`{ [id]: value }`).
-- Clone objects with spread (`{ ...user, active: true }`) or structuredClone for deep copies.
-- Use `Object.assign` cautiously; avoid mutating source objects.
+- Working with data structures safely prevents bugs, especially in stateful UI frameworks.
 
-## Array Operations
+## Core Ideas
 
-- Immutable transformations: `map`, `filter`, `reduce`, `slice`, `concat`.
-- Spread to append/prepend: `[...list, newItem]`, `[newItem, ...list]`.
-- Prefer `find`/`some`/`every` for search, `flatMap` for nested arrays.
+- Object manipulation: property shorthand, computed keys, spread cloning, `structuredClone` for deep copies, avoid mutating sources.
+- Arrays: use immutable helpers (`map`, `filter`, `reduce`, `slice`, `concat`), employ spread to append/prepend, leverage `find/some/every/flatMap` for queries.
+- Maps & Sets: `Map` for ordered key/value with non-string keys, `Set` for uniqueness, weak collections for metadata tied to object lifecycle.
+- Destructuring: extract/rename nested properties with defaults to avoid `undefined` errors.
+- Immutability in React: never mutate state; create new references, use nested spreads or `immer` when updates get complex.
 
-## Maps, Sets & Weak Collections
+## Real-World Scenario
 
-- `Map` maintains insertion order, supports non-string keys; ideal for caching.
-- `Set` ensures uniqueness and supports fast membership checks.
-- Weak variants (`WeakMap`, `WeakSet`) allow garbage collection; useful for metadata tied to objects.
+- A React app managed user preferences. Switching to immutable updates prevented stale renders and made undo/redo features straightforward.
 
-## Destructuring Patterns
+## Follow-up
 
-- Extract nested properties: `const { profile: { email } = {} } = user`.
-- Rename while destructuring: `const { id: userId } = user`.
-- Combine with defaults for optional properties.
-
-## Immutability in React
-
-- Never mutate state directly; create new references to trigger re-renders.
-- Nested updates: `setState(prev => ({ ...prev, settings: { ...prev.settings, theme } }))`.
-- Use libraries (`immer`) when updates become complex, but understand plain JS first.
-
-## Practice Prompts
-
-- Given an array of products, produce derived arrays (available only, sorted by price) without mutating the original list.
-- Convert an object keyed by IDs into an array of values and vice versa using `reduce`.
-- Implement a lookup cache using `Map` with JSON responses keyed by request URL.
+- [ ] Produce derived arrays (e.g., filter available products, sort by price) without mutating the original list.
+- [ ] Convert an object keyed by IDs into an array and back using `reduce`.
+- [ ] Implement a request cache using `Map` keyed by URL for JSON responses.

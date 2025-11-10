@@ -6,41 +6,32 @@ last_reviewed: 09-11-2025
 
 # JavaScript Language Basics
 
-## Execution Model & Strict Mode
+## Why It Matters
 
-- JavaScript runs in a single-threaded event loop; understand call stack vs task/microtask queues for async behavior.
-- Always enable strict mode (`"use strict"` or bundler defaults) to catch silent errors (e.g., implicit globals).
+- Mastering modern syntax and scope rules prevents subtle bugs and lays the foundation for advanced topics.
 
-## Declarations & Scope
+## Core Ideas
 
-- Prefer `const` for immutability and `let` for reassignable bindings; avoid `var`.
-- Block scope controls variable lifetime inside `{}`; closures capture lexical scope for functions.
-- Hoisting moves declarations to the top of scope, but with `let`/`const` you must respect the temporal dead zone before initialization.
+- Execution model: single-threaded event loop with call stack plus task/microtask queues; enable strict mode to catch silent errors.
+- Declarations & scope: favor `const`/`let`, avoid `var`; understand block scope, closures, hoisting, and the temporal dead zone.
+- Types & comparisons: learn primitive vs object types, prefer `===`, know falsy values, convert explicitly.
+- Strings & templates: use template literals for interpolation/multi-line text; tagged templates preprocess input when needed.
+- Destructuring & spread: break apart arrays/objects, use rest/spread for cloning/merging, provide defaults.
+- Control flow: combine `if`, `switch`, ternary, logical operators; distinguish `||` vs `??` for default values.
 
-## Types & Comparisons
+## Real-World Scenario
 
-- Primitive types: string, number, bigint, boolean, null, undefined, symbol. Objects include arrays, functions, dates, maps, sets.
-- Use `===` strictly; avoid `==` coercion. Convert explicitly (`Number()`, `Boolean()`) when needed.
-- Falsy values: `false`, `0`, `""`, `null`, `undefined`, `NaN`. Guard conditions should account for legitimate values like `0`.
+- Refactoring a legacy script from `var` to `const`/`let` eliminated race conditions caused by hoisting and clarified which values could change. Adding "use strict" surfaced undeclared globals during tests.
 
-## Strings & Template Literals
+## Follow-up
 
-- Template literals `` `Hello ${name}` `` support interpolation and multi-line strings.
-- Tagged templates allow preprocessing (e.g., styled-components); understand signature `tag(strings, ...values)`.
+- [ ] Rewrite a snippet using `var` declarations to `let`/`const` and explain scope differences.
+- [ ] Use destructuring to extract nested props with defaults in a React component.
+- [ ] Implement a guard function using `??` to provide default config values without overriding valid falsy settings.
 
-## Destructuring & Spread
+---
 
-- Destructure arrays/objects for readability (`const { props } = obj`).
-- Spread (`...`) clones/merges arrays, objects; rest collects remaining elements/function arguments.
-- Default values in destructuring avoid `undefined` type errors.
+**Notes**
 
-## Control Flow & Short-Circuiting
-
-- Use `if/else`, `switch`, ternary (`condition ? a : b`), and logical operators (`&&`, `||`, `??`) for conditional logic.
-- Nullish coalescing (`??`) preserves valid falsy values like `0`, unlike `||`.
-
-## Practice Prompts
-
-- Rewrite a snippet using `var` declarations to utilize `let`/`const` and explain the differences in scope.
-- Use destructuring to extract nested values from a React props object, including defaults.
-- Implement a guard function using `??` to provide default config values without overriding valid falsy settings.
+- Confirm ES2023/ES2024 features (e.g., `structuredClone`, `findLast`) availability when referencing runtime targets.
+- Link MDN event loop article for future deep dives if needed.
